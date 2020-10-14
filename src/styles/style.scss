@@ -1,0 +1,879 @@
+@import "./base";
+@import "./variables";
+@import "./layout";
+
+body {
+  color: map-get($color, 'dark');
+}
+
+// header
+.wrapper {
+  background: url('../images/header.png') center no-repeat;
+}
+
+//main-nav
+.main-nav {
+  @extend %flex-align-center;
+  @extend %justify-content-space-between;
+  padding: 15px;
+
+  &.open {
+    flex-direction: column;
+
+    .toggle-btn {
+      .hamburger-menu {
+        display: none;
+      }
+
+      .close {
+        display: inline-block;
+      }
+    }
+  }
+
+  &-content {
+    @extend %flex-align-center;
+    @extend %justify-content-space-between;
+
+    @media screen and (max-width: map-get($breakpoints, 'sm')) {
+      width: 100%;
+    }
+  }
+
+  &-logo {
+    @extend %logo;
+    color: map-get($color, 'dark');
+
+    @media screen and (max-width: map-get($breakpoints, 'md')) {
+      font-size: 30px;
+    }
+
+    @media screen and (min-width: map-get($breakpoints, 'md')) {
+      font-size: 50px;
+    }
+
+    &:hover {
+      color: darken(map-get($color, 'dark'), 30%);
+    }
+  }
+
+  .toggle-btn {
+    display: none;
+    font-size: 32px;
+    color: map-get($color, 'dark');
+    cursor: pointer;
+
+    &:hover {
+      color: lighten (map-get($color, 'dark'), 70%);
+    }
+
+    .hamburger-menu {
+      display: inline-block;
+    }
+
+    .close {
+      display: none;
+    }
+
+    @media screen and (max-width: map-get($breakpoints, 'sm')) {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  &-list {
+    @extend %flex-align-center;
+
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    @media screen and (max-width: map-get($breakpoints, 'sm')) {
+      display: none;
+    }
+
+    .open & {
+      display: flex;
+      flex-direction: column;
+      border-top: 1px solid map-get($color, 'dark');
+      border-bottom: 1px solid map-get($color, 'dark');
+      width: 100%;
+    }
+  }
+
+  &-item {
+    position: relative;
+    padding-top: 15px;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: map-get($text-transform, 'nav');
+
+    @media screen and (max-width: map-get($breakpoints, 'md')) {
+      font-size: 14px;
+      padding-bottom: 5px;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background-color: transparent;
+      transition: background-color .3s ease-in;
+
+      @media screen and (max-width: map-get($breakpoints, 'md')) {
+        height: 2px;
+      }
+
+      @media screen and (max-width: map-get($breakpoints, 'sm')) {
+        display: none;
+      }
+    }
+
+    &:not(:first-child) {
+      margin-left: 20px;
+
+      @media screen and (min-width: map-get($breakpoints, 'xl')) {
+        margin-left: 50px;
+      }
+
+      @media screen and (max-width: map-get($breakpoints, 'md')) {
+        margin-left: 10px;
+      }
+    }
+
+    .open & {
+      margin-right: 0;
+      margin-bottom: 15px;
+
+      &:first-child {
+        margin-left: 10px;
+      }
+
+      &:last-child {
+        margin-bottom: 15px;
+      }
+    }
+
+    &:hover {
+      &::before {
+        background-color: map-get($color, 'header-btn');
+      }
+    }
+  }
+
+  &-link {
+    color: map-get($color, 'dark');
+    transition: 0.3s;
+
+    &:hover {
+      color: lighten(map-get($color, 'dark'), 20%);
+    }
+  }
+}
+
+//header-content
+.header {
+  &-content {
+    @extend %d-flex;
+    @extend %align-items-start;
+    @extend %justify-content-center;
+    flex-flow: column nowrap;
+    margin-top: 200px;
+    height: 100%;
+
+    @media only screen and (max-width: map-get($breakpoints, 'md')) {
+      margin-top: 50px;
+    }
+
+    @media only screen and (max-width: map-get($breakpoints, 'xs')) {
+      margin-left: 20px;
+    }
+  }
+
+  &-title {
+    margin-bottom: 20px;
+    font-size: 50px;
+    font-weight: 800;
+    text-transform: map-get($text-transform, 'title');
+  }
+
+  &-text {
+    max-width: 50%;
+    margin-bottom: 30px;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.7;
+
+    @media screen and (max-width: map-get($breakpoints, 'md')) {
+      max-width: 60%;
+    }
+  }
+
+  &-btn {
+    margin-bottom: 170px;
+
+    @extend %btn;
+    background-color: map-get($color, 'header-btn');
+
+    @media screen and (max-width: map-get($breakpoints, 'md')) {
+      margin-bottom: 70px;
+    }
+
+    &:hover {
+      background-color: darken(map-get($color, 'header-btn'), 10%);
+    }
+
+    &:active {
+      box-shadow: inset 0 0 0 2px darken(map-get($color, 'header-btn'), 10%);
+      background-color: map-get($color, 'header-btn');
+    }
+  }
+
+  .back-to-top {
+    @extend %d-flex;
+    @extend %justify-content-center;
+  }
+
+  .scroll {
+    margin-bottom: 50px;
+  }
+}
+
+//about
+.about {
+  background-color: map-get($color, 'about-bg');
+
+  &-img {
+
+    @media screen and (min-width: map-get($breakpoints, 'lg')) and (-ms-high-contrast: active),
+    (-ms-high-contrast: none) {
+      width: 50%;
+      height: 500px;
+    }
+  }
+
+  &-content {
+    margin: 100px 10px;
+    padding: 10px;
+    color: map-get($color, 'light');
+
+    @media screen and (max-width: map-get($breakpoints, 'lg')) {
+      margin-top: 0;
+      margin-bottom: 0;
+      text-align: center;
+    }
+
+    @media only screen and (max-width: map-get($breakpoints, 'sm')) {
+      margin: auto;
+    }
+  }
+
+  &-title {
+    @extend %title;
+    margin-bottom: 30px;
+  }
+
+  &-text {
+    margin-bottom: 15px;
+    font-size: 18px;
+  }
+}
+
+//service 
+.service {
+  background-color: map-get($color, 'service-bg');
+
+  &-row {
+    @extend %justify-content-space-between;
+    @extend %align-items-center;
+    flex-wrap: wrap-reverse;
+    padding-top: 50px;
+    padding-bottom: 50px;
+
+    @media screen and (max-width: map-get($breakpoints, 'lg')) {
+      justify-content: center;
+    }
+  }
+
+  &-content {
+    display: block;
+    max-width: 50%;
+
+    @media screen and (max-width: map-get($breakpoints, 'lg')) {
+      margin-top: 30px;
+      max-width: 100%;
+    }
+
+    @media screen and (max-width: map-get($breakpoints, 'sm')) {
+      max-width: 450px;
+    }
+  }
+
+  &-item {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 20px 100px 20px 40px;
+    border: none;
+    background-color: map-get($color, 'light');
+    color: map-get($color, 'dark');
+    font-family: inherit;
+    font-size: 20px;
+    font-weight: 700;
+    text-transform: capitalize;
+    transition: .3s;
+
+    @media screen and (max-width: map-get($breakpoints, 'sm')) {
+      padding-right: 80px;
+      font-size: 18px;
+    }
+
+    @media screen and (max-width: map-get($breakpoints, 'xs')) {
+      width: 80%;
+      margin: auto;
+      padding-left: 10px;
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 15px;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 70px;
+      width: 1px;
+      height: 100%;
+      background-color: lighten(map-get($color, 'dark'), 50%);
+    }
+
+    &:hover {
+      box-shadow: 2px 2px 8px map-get($color, 'dark');
+      background-color: darken(map-get($color, 'light'), 5%);
+      cursor: pointer;
+    }
+
+    &:active {
+      box-shadow: 1px 1px 8px map-get($color, 'dark');
+      background-color: darken(map-get($color, 'light'), 20%);
+      cursor: pointer;
+    }
+
+    .icon {
+      font-size: 32px;
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+
+  &-main {
+    position: relative;
+
+    img {
+      @media screen and (max-width: 500px) {
+        width: 300px;
+      }
+    }
+  }
+
+  &-title {
+    position: absolute;
+    top: 40%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    @extend %title;
+    color: map-get($color, 'light');
+    text-shadow: 2px 2px 8px map-get($color, 'dark');
+    text-align: center;
+  }
+}
+
+//gallery
+.gallery {
+  background-color: map-get($color, 'gallery-bg');
+  padding-bottom: 30px;
+
+  &-title {
+    @extend %title;
+    padding-top: 50px;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  &-text {
+    margin: 0 auto 30px;
+    max-width: 60%;
+    text-align: center;
+
+    @media screen and (max-width: map-get($breakpoints, 'lg')) {
+      max-width: 100%;
+    }
+  }
+
+  &-images {
+    margin-bottom: 30px;
+  }
+
+  .row {
+    @extend %align-items-center;
+    @extend %justify-content-center;
+  }
+
+  &-small {
+    @extend %d-flex;
+    @extend %align-items-center;
+    flex-flow: column wrap;
+  }
+
+  &-image {
+    margin-left: 15px;
+    margin-bottom: 15px;
+
+    @media screen and (max-width: map-get($breakpoints, 'xs')) {
+      max-width: 320px;
+    }
+
+    @media screen and (max-width: map-get($breakpoints, 'xxs')) {
+      max-width: 250px;
+    }
+  }
+
+  .first-image {
+    @media screen and (max-width: map-get($breakpoints, 'md')) {
+      max-width: 500px;
+    }
+
+    @media screen and (max-width: map-get($breakpoints, 'sm')) {
+      max-width: 370px;
+    }
+
+    @media screen and (max-width: map-get($breakpoints, 'xs')) {
+      max-width: 320px;
+    }
+
+    @media screen and (max-width: map-get($breakpoints, 'xxs')) {
+      max-width: 250px;
+    }
+  }
+
+  .fourth-image {
+    @media screen and (max-width: map-get($breakpoints, 'sm')) {
+      max-width: 370px;
+    }
+
+    @media screen and (max-width: map-get($breakpoints, 'xs')) {
+      max-width: 320px;
+    }
+
+    @media screen and (max-width: map-get($breakpoints, 'xxs')) {
+      max-width: 250px;
+    }
+  }
+
+  .fifth-image {
+    @media screen and (max-width: map-get($breakpoints, 'sm')) {
+      max-width: 370px;
+    }
+
+    @media screen and (max-width: map-get($breakpoints, 'xs')) {
+      max-width: 320px;
+    }
+
+    @media screen and (max-width: map-get($breakpoints, 'xxs')) {
+      max-width: 250px;
+    }
+  }
+
+  &-btn {
+    @extend %d-flex;
+    @extend %justify-content-center;
+    @extend %btn;
+    margin: auto;
+    width: 200px;
+    background-color: map-get($color, 'gallery-btn');
+
+    &:hover {
+      background-color: darken(map-get($color, 'gallery-btn'), 10%);
+    }
+
+    &:active {
+      box-shadow: inset 0 0 0 2px darken(map-get($color, 'gallery-btn'), 10%);
+      background-color: map-get($color, 'gallery-btn');
+    }
+  }
+}
+
+//subscribe
+.subscribe {
+  background: url('../images/subscribe.png') center no-repeat;
+  background-size: cover;
+  height: 100%;
+  padding-top: 40px;
+  padding-bottom: 70px;
+
+  @media only screen and (max-width: map-get($breakpoints, 'sm')) {
+    margin-left: 20px;
+  }
+
+  &-title {
+    @extend %title;
+    margin-bottom: 30px;
+    font-size: 48px;
+
+    @media screen and (max-width: map-get($breakpoints, 'lg')) {
+      font-size: 32px;
+    }
+  }
+
+  &-text {
+    max-width: 50%;
+    margin-bottom: 30px;
+  }
+
+  .form {
+    @extend %flex-align-center;
+
+    &-controls {
+      width: 50%;
+      padding: 10px 20px;
+      margin-right: 10px;
+      border: none;
+      box-shadow: inset 0 0 0 1px map-get($color, 'dark');
+      font-family: inherit;
+      font-size: inherit;
+
+      @media screen and (max-width: map-get($breakpoints, 'sm')) {
+        margin-bottom: 10px;
+      }
+
+      &:focus {
+        box-shadow: inset 0 0 0 2px map-get($color, 'subscribe-btn');
+      }
+
+      &:active {
+        box-shadow: inset 0 0 0 2px map-get($color, 'subscribe-btn');
+        background-color: darken(map-get($color, 'light'), 10%);
+      }
+    }
+
+    &-subscribe {
+      @extend %btn;
+      border: none;
+      background-color: map-get($color, 'subscribe-btn');
+
+      &:hover {
+        background-color: darken(map-get($color, 'subscribe-btn'), 10%);
+        cursor: pointer;
+      }
+
+      &:active {
+        box-shadow: inset 0 0 0 2px darken(map-get($color, 'subscribe-btn'), 10%);
+        background-color: map-get($color, 'subscribe-btn');
+      }
+    }
+  }
+}
+
+//blog
+.blog {
+  background-color: map-get($color, 'blog-bg');
+  color: map-get($color, 'light');
+  padding-bottom: 30px;
+
+  &-title {
+    @extend %title;
+    padding-top: 50px;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  &-text {
+    margin: 0 auto 30px;
+    max-width: 60%;
+    text-align: center;
+
+    @media screen and (max-width: map-get($breakpoints, 'lg')) {
+      max-width: 100%;
+    }
+  }
+
+  &-posts {
+    @extend %align-items-center;
+    @extend %justify-content-center;
+    margin-bottom: 30px;
+  }
+
+  &-post {
+    position: relative;
+    width: 350px;
+    height: 295px;
+    margin-bottom: 15px;
+    box-shadow: 0 15px 25px -15px map-get($color, 'dark');
+
+    &:not(:last-child) {
+      margin-right: 15px;
+    }
+
+    @media screen and (max-width: map-get($breakpoints, 'md')) {
+      margin: 0 15px 15px;
+    }
+
+
+    &-shadow {
+      width: 100%;
+      height: 105%;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0) 50%);
+    }
+
+    &-text {
+      position: absolute;
+      bottom: 50px;
+      left: 25px;
+      right: 25px;
+    }
+
+    &-title {
+      margin-bottom: 10px;
+
+      &-link {
+        font-size: 20px;
+        text-decoration: none;
+        color: inherit;
+        transition: .3s;
+
+        &:hover {
+          text-shadow: 2px 2px 8px map-get($color, 'dark');
+          cursor: pointer;
+        }
+      }
+    }
+
+    &-comments {
+      font-size: 16px;
+    }
+
+    &-time {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 25px;
+      left: 25px;
+      padding: 2px 5px;
+      background-color: lighten(map-get($color, 'dark'), 10%);
+      opacity: .8;
+      border-radius: 4px;
+      font-size: 20px;
+      font-weight: 700;
+      text-align: center;
+      text-transform: uppercase;
+
+      .date {
+        font-size: 24px;
+      }
+    }
+  }
+
+  .first-post {
+    background: url('../images/blog-1.png') center no-repeat;
+  }
+
+  .second-post {
+    background: url('../images/blog-2.png') center no-repeat;
+  }
+
+  .third-post {
+    background: url('../images/blog-3.png') center no-repeat;
+  }
+
+  &-btn {
+    @extend %d-flex;
+    @extend %justify-content-center;
+    @extend %btn;
+    margin: auto;
+    width: 200px;
+    background-color: map-get($color, 'blog-btn');
+
+    &:hover {
+      background-color: darken(map-get($color, 'blog-btn'), 10%);
+    }
+
+    &:active {
+      box-shadow: inset 0 0 0 2px darken(map-get($color, 'blog-btn'), 10%);
+      background-color: map-get($color, 'blog-btn');
+    }
+  }
+}
+
+//contact
+.contact {
+  background: url('../images/contact.png') center no-repeat;
+  padding-bottom: 30px;
+
+  &-title {
+    @extend %title;
+    padding-top: 50px;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  &-text {
+    margin: 0 auto 30px;
+    max-width: 50%;
+    text-align: center;
+
+    @media screen and (max-width: map-get($breakpoints, 'lg')) {
+      max-width: 100%;
+    }
+  }
+
+  &-content {
+    @extend %align-items-center;
+    @extend %justify-content-center;
+    flex-wrap: wrap-reverse;
+
+    .form {
+      @extend %flex-align-center;
+      flex-direction: column;
+      width: 50%;
+      margin: auto;
+
+      @media screen and (max-width: map-get($breakpoints, 'lg')) {
+        margin: 20px 0 0;
+        width: 70%;
+      }
+
+      &-controls {
+        width: 100%;
+        padding: 10px 16px;
+        background-color: map-get($color, 'contact-form');
+        opacity: .4;
+        border: none;
+        font-family: inherit;
+        font-size: 16px;
+        text-align: left;
+        transition: border .1s;
+
+        &:not(:last-child) {
+          margin-bottom: 10px;
+        }
+
+        &:hover {
+          opacity: .7;
+          cursor: pointer;
+        }
+
+        &:focus,
+        &:active {
+          opacity: .9;
+          border-left: 4px solid map-get($color, 'contact-border');
+        }
+
+        &::placeholder {
+          color: map-get($color, 'light');
+        }
+      }
+
+      .message {
+        resize: none;
+        overflow: auto;
+      }
+    }
+
+    .address {
+      @extend %d-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 45%;
+      height: 300px;
+      font-size: 18px;
+      line-height: 20px;
+
+      @media screen and (max-width: map-get($breakpoints, 'lg')) {
+        width: 70%;
+        height: auto;
+      }
+
+      &-title {
+        text-transform: uppercase;
+        font-weight: 700;
+      }
+
+      &-subtitle {
+        font-weight: 300;
+        color: inherit;
+
+        &:not(:last-child) {
+          margin-bottom: 12px;
+        }
+
+        &:hover {
+          text-shadow: 1px 1px 8px map-get($color, 'contact-form');
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+//footer 
+.footer {
+  background-color: map-get($color, 'dark');
+  color: map-get($color, 'light');
+
+  &-content {
+    @extend %flex-align-center;
+    @extend %justify-content-space-between;
+    padding: 20px 0;
+    flex-wrap: nowrap;
+    color: darken(map-get($color, 'light'), 30%);
+    line-height: 25px;
+  }
+
+  &-logo {
+    @extend %logo;
+    color: map-get($color, 'light');
+
+    @media screen and (max-width: map-get($breakpoints, 'md')) {
+      font-size: 20px;
+    }
+
+    @media screen and (min-width: map-get($breakpoints, 'md')) {
+      font-size: 40px;
+    }
+
+    &:hover {
+      color: darken(map-get($color, 'light'), 30%);
+    }
+  }
+
+  .copyright {
+    font-size: 16px;
+
+    @media screen and (max-width: map-get($breakpoints, 'md')) {
+      max-width: 220px;
+    }
+  }
+
+  .slogan {
+    font-size: 16px;
+
+    @media screen and (max-width: map-get($breakpoints, 'md')) {
+      margin-left: 15px;
+    }
+
+    &-highlight {
+      font-weight: bold;
+      color: map-get($color, 'love');
+    }
+  }
+}
