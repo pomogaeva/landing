@@ -614,17 +614,18 @@ body {
   .subscribe .form-controls {
     margin-bottom: 10px;
   }
+  .subscribe .form-controls::placeholder,
+  .subscribe .form-controls:-ms-input-placeholder {
+  font-size: 16px; 
+  }
 }
+
 .subscribe .form-controls:focus {
   box-shadow: inset 0 0 0 2px #96b92c;
 }
 .subscribe .form-controls:active {
   box-shadow: inset 0 0 0 2px #96b92c;
   background-color: #e6e6e6;
-}
-
-.subscribe .form-controls::placeholder {
-  font-size: 10px; 
 }
 
 .subscribe .form-subscribe {
@@ -803,7 +804,8 @@ body {
   opacity: 0.9;
   border-left: 4px solid #355b82;
 }
-.contact-content .form-controls::placeholder {
+.contact-content .form-controls::placeholder,
+.contact-content .form-controls:-ms-input-placeholder {
   color: #fff;
 }
 .contact-content .form .message {
